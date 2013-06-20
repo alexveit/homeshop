@@ -1,3 +1,8 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="_styles.css" media="screen">
+</head>
+
 <?php
 		
 	$temp = explode("T", $_POST['datetime']);
@@ -156,6 +161,19 @@
 	
 	$emailBody .= $samples;
 	
-	echo $emailBody; 
+	
+	$recipient = "alex.wveit@gmail.com";
+	$subject = "New Measurement Request";
+	
+	
+	// To send HTML mail, the Content-type header must be set
+	$mailheader  = 'MIME-Version: 1.0' . "\r\n";
+	$mailheader .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$mailheader .= "From: ".$_POST['email']."\r\n";
+	
+	mail($recipient, $subject, $emailBody, $mailheader) or die("Error!");
+	
+	echo "Thank you ".$_POST['firstname']." ".$_POST['lastname'].".<br>Your appointment request has been sent.<br>A representative will be contacting you shortly."; 
 	
 ?>
+</html>

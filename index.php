@@ -6,8 +6,6 @@
 <link rel="stylesheet" type="text/css" href="_styles.css" media="screen">
 
 <style type="text/css">
-p{padding:0;margin:0;}
-body{padding:0;margin:0;background-color:white;}
 input[type="text"] {
      width: 100%; 
      box-sizing: border-box;
@@ -187,37 +185,44 @@ function validateForm()
 		<tr>
 			<td colspan="2">
 				<ol class="tree">
-					<li>What samples would you like to see?</li>
+					<li>I Want to see the following samples.</li>
 					<li><br></li>
 					<li>
 						<label for="Hardwood">Hardwood</label> <input class="oltree" type="checkbox" id="Hardwood" name="Hardwood" />
 						<ol>
-							<li><input type="checkbox" id="Solid" name="Solid" />Solid</li>
-							<li><input type="checkbox" id="Engineered" name="Engineered" />Engineered</li>
-							<li><input type="checkbox" id="Bamboo" name="Bamboo" />Bamboo</li>
-							<li><input type="checkbox" id="Cork" name="Cork" />Cork</li>
 							<li>
-								<label for="Species">Species</label> <input class="oltree" type="checkbox" id="Species" /> 
-								<ol>
-									<li><input type="checkbox" id="HardwoodOak" name="HardwoodOak"/>Oak</li>
-									<li><input type="checkbox" id="HardwoodMaple" name="HardwoodMaple"/>Maple</li>
-									<li><input type="checkbox" id="HardwoodHickory" name="HardwoodHickory"/>Hickory</li>
-								</ol>
-							</li>
-							<li>
-								<label for="Finish">Finish</label> <input class="oltree" type="checkbox" id="Finish" /> 
-								<ol>
-									<li><input type="checkbox" id="HardwoodSmooth" name="HardwoodSmooth" />Smooth</li>
-									<li><input type="checkbox" id="HardwoodHandscraped" name="HardwoodHandscraped" />Handscraped</li>
-								</ol>
-							</li>
-							<li>
-								<label for="Width">Width</label> <input class="oltree" type="checkbox" id="Width" /> 
-								<ol>
-									<li><input type="checkbox" id="Hardwoodtwoonequarter" name="Hardwoodtwoonequarter" />2' 1/4" </li>
-									<li><input type="checkbox" id="Hardwoodthreehalf" name="Hardwoodthreehalf" />3' 1/2"</li>
-									<li><input type="checkbox" id="Hardwoodfive" name="Hardwoodfive" />5'</li>
-								</ol>
+								<table style="position:relative; left:-30px; width:400px; border-style:solid; border-width:1px;" >
+									<tr>
+										<td><b>Type</b></td>
+										<td><b>Species</b></td>
+										<td><b>Finish</b></td>
+										<td><b>Width</b></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Solid" name="Solid" />Solid</td>
+										<td><input type="checkbox" id="HardwoodOak" name="HardwoodOak"/>Oak</td>
+										<td><input type="checkbox" id="HardwoodSmooth" name="HardwoodSmooth" />Smooth</td>
+										<td><input type="checkbox" id="Hardwoodtwoonequarter" name="Hardwoodtwoonequarter" />2 1/4"</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Engineered" name="Engineered" />Engineered</td>
+										<td><input type="checkbox" id="HardwoodMaple" name="HardwoodMaple"/>Maple</td>
+										<td><input type="checkbox" id="HardwoodHandscraped" name="HardwoodHandscraped" />Handscraped</td>
+										<td><input type="checkbox" id="Hardwoodthreehalf" name="Hardwoodthreehalf" />3 1/2"</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Bamboo" name="Bamboo" />Bamboo</td>
+										<td><input type="checkbox" id="HardwoodHickory" name="HardwoodHickory"/>Hickory</td>
+										<td></td>
+										<td><input type="checkbox" id="Hardwoodfive" name="Hardwoodfive" />5"</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Cork" name="Cork" />Cork</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
 							</li>
 						</ol>
 					</li>
@@ -228,6 +233,19 @@ function validateForm()
 	<input name="save" type="submit" value="Submit" />
 	<input type="reset" value="Clear" />
 </form>
+
+
+<!--
+
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+		
+-->
+
+
+
 </center>
 </body>
 </html>
