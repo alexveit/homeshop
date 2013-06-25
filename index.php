@@ -2,9 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-
 <link rel="stylesheet" type="text/css" href="_styles.css" media="screen">
-
 <style type="text/css">
 input[type="text"] {
      width: 100%; 
@@ -20,11 +18,21 @@ textarea
     padding:3px;
 }
 </style>
-
 <script>
 function isWhitespaceNotEmpty(text)
 {
 	return text==null || text=="" || text.length > 0 && !/[^\s]/.test(text);
+}
+
+function good_email_address(x)
+{
+	var atpos=x.indexOf("@");
+	var dotpos=x.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+	{
+		return false;
+	}
+	return true;
 }
 
 function validateForm()
@@ -138,22 +146,38 @@ function validateForm()
 		field.focus();
 		return false;
 	}
+	
+	if (!good_email_address(value))
+	{
+		alert("Invalid Email");
+		field.focus();
+		return false;
+	}
+	
 	return true;
 }
-
 </script>
-
 </head>
 <body>
 <center>
+<h1>Set Appointment</h1>
 <div>
-	<div >
-	<img src="speedingtruck.gif">
-	</div>
+	<table border="0">
+		<tr>
+			<td><img src="speedingtruck.gif"></td>
+			<td>
+				<table>
+					<tr>
+						<td style="border-style:solid; border-width:1px;"><i>Fill out your information and<br>the type of material you would<br>like us to bring.</i></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </div>
+<br>
 <form name="myForm" onsubmit="return validateForm()" action="next.php" method="post">
 	<table border="0">
-		<tr><td colspan="2" style="text-align:center"><h1>Set Appointment</h1></td></tr>
 		<tr><td colspan="2">* = required</td></tr>
 		<tr>
 			<td colspan="2">Date & Time:* <input type="datetime-local" name="datetime"></td>
@@ -293,8 +317,6 @@ function validateForm()
 	<input name="save" type="submit" value="Submit" />
 	<input type="reset" value="Clear" />
 </form>
-
-
 </center>
 </body>
 </html>

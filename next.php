@@ -1,5 +1,4 @@
 <html>
-
 <body>
 <?php
 
@@ -10,7 +9,7 @@ function get_user_info()
 	$datetime = "$date[1]/$date[2]/$date[0] @ $temp[1]";
 	
 	$user_info =  "
-	<table border='0'>
+	<table style='border-style:solid; border-width:1px;'>
 		<tr><td colspan='2' style='text-align:center'><h2>New Appointment</h2></td></tr>
 		<tr>
 			<td colspan='2'><b>Date & Time:</b> <i>$datetime</i></td>
@@ -310,18 +309,18 @@ function send_email($emailBody)
 	$recipient = "alex.wveit@gmail.com";
 	$subject = "New Measurement Request";
 
-
 	// To send HTML mail, the Content-type header must be set
 	$mailheader  = 'MIME-Version: 1.0' . "\r\n";
 	$mailheader .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	$mailheader .= "From: ".$_POST['email']."\r\n";
-
+	
 	mail($recipient, $subject, $emailBody, $mailheader) or die("Error!");
-
-	echo "Thank you ".$_POST['firstname']." ".$_POST['lastname']."!<br>Your appointment request has been sent.<br>A representative will be contacting you shortly."; 
-	
 }
-	
+
+function display_thankyou()
+{
+	echo "Thank you ".$_POST['firstname']." ".$_POST['lastname']."!<br>Your appointment request has been sent.<br>A representative will be contacting you shortly."; 
+}
 	
 $emailBody = get_user_info();
 
@@ -334,6 +333,8 @@ $emailBody .= get_tile_info();
 //echo $emailBody;
 
 send_email($emailBody);
+
+display_thankyou();
 
 ?>
 </body>
