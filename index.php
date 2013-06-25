@@ -146,9 +146,14 @@ function validateForm()
 </head>
 <body>
 <center>
+<div>
+	<div >
+	<img src="speedingtruck.gif">
+	</div>
+</div>
 <form name="myForm" onsubmit="return validateForm()" action="next.php" method="post">
 	<table border="0">
-		<tr><td colspan="2" style="text-align:center"><h2>Set Appointment</h2></td></tr>
+		<tr><td colspan="2" style="text-align:center"><h1>Set Appointment</h1></td></tr>
 		<tr><td colspan="2">* = required</td></tr>
 		<tr>
 			<td colspan="2">Date & Time:* <input type="datetime-local" name="datetime"></td>
@@ -226,6 +231,61 @@ function validateForm()
 							</li>
 						</ol>
 					</li>
+					<li><br></li>
+					<li>
+						<label for="Laminate">Laminate</label> <input class="oltree" type="checkbox" id="Laminate" name="Laminate" />
+						<ol>
+							<li>
+								<table style="position:relative; left:-30px; width:280px; border-style:solid; border-width:1px;" >
+									<tr>
+										<td><b>Millimeter</b></td>
+										<td><b>Finish</b></td>
+										<td><b>Width</b></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Laminate7" name="Laminate7" />7</td>
+										<td><input type="checkbox" id="LaminateHandscraped" name="LaminateHandscraped"/>Handscraped</td>
+										<td><input type="checkbox" id="Laminate3inch" name="Laminate3inch"/>3"</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Laminate8" name="Laminate8" />8</td>
+										<td><input type="checkbox" id="LaminateSmooth" name="LaminateSmooth"/>Smooth</td>
+										<td><input type="checkbox" id="Laminate5inch" name="Laminate5inch"/>5"</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Laminate12" name="Laminate12" />12</td>
+										<td><input type="checkbox" id="LaminatePiano" name="LaminatePiano"/>Piano</td>
+										<td><input type="checkbox" id="Laminate6inch" name="Laminate6inch"/>6"</td>
+									</tr>
+								</table>
+							</li>
+						</ol>
+					</li>
+					<li><br></li>
+					<li>
+						<label for="Tile">Tile</label> <input class="oltree" type="checkbox" id="Tile" name="Tile" />
+						<ol>
+							<li>
+								<table style="position:relative; left:-30px; width:100px; border-style:solid; border-width:1px;" >
+									<tr>
+										<td><b>Type</b></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Ceramic" name="Ceramic" />Ceramic</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Porcelain" name="Porcelain" />Porcelain</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Stone" name="Stone" />Stone</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="Glass" name="Glass" />Glass</td>
+									</tr>
+								</table>
+							</li>
+						</ol>
+					</li>
 				</ol>	
 			</td>
 		</tr>
@@ -233,17 +293,6 @@ function validateForm()
 	<input name="save" type="submit" value="Submit" />
 	<input type="reset" value="Clear" />
 </form>
-
-
-<!--
-
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-		
--->
-
 
 
 </center>
