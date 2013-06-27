@@ -4,9 +4,9 @@
 
 function get_user_info()
 {
-	$temp = explode("T", $_POST['datetime']);
-	$date = explode("-", $temp[0]);
-	$datetime = "$date[1]/$date[2]/$date[0] @ $temp[1]";
+	$date = explode("-", $_POST['date']);
+	$time = $_POST['time'];
+	$datetime = "$date[1]/$date[2]/$date[0] @ $time";
 	
 	$user_info =  "
 	<table style='border-style:solid; border-width:1px;'>
@@ -60,13 +60,13 @@ function get_hardwood_info()
 	$info = "";
 	
 	$array = array("Solid","Engineered","Bamboo","Cork",
-		"HardwoodOak","HardwoodMaple","HardwoodHickory",
-		"HardwoodSmooth","HardwoodHandscraped",
+		"HardwoodOak","HardwoodMaple","HardwoodHickory","HardwoodBirch",
+		"HardwoodExotic","HardwoodSmooth","HardwoodHandscraped",
 		"Hardwoodtwoonequarter","Hardwoodthreehalf","Hardwoodfive");
 	
 	$good = false;
 	
-	for($i = 0; $i < 12; $i++)
+	for($i = 0; $i < 14; $i++)
 	{
 		if(isset($_POST[$array[$i]]))
 		{
@@ -99,7 +99,7 @@ function get_hardwood_info()
 		
 		$temp = "<li>Species</li><ul>";
 		$good = false;
-		for($i = 4; $i < 7; $i++)
+		for($i = 4; $i < 9; $i++)
 		{
 			if(isset($_POST[$array[$i]]))
 			{
@@ -109,6 +109,8 @@ function get_hardwood_info()
 				case 4: $temp .= "<li>Oak</li>"; break;
 				case 5: $temp .= "<li>Maple</li>"; break;
 				case 6: $temp .= "<li>Hickory</li>"; break;
+				case 7: $temp .= "<li>Brich</li>"; break;
+				case 8: $temp .= "<li>Exotic</li>"; break;
 				}
 			}
 			
@@ -119,15 +121,15 @@ function get_hardwood_info()
 			
 		$temp = "<li>Finish</li><ul>";
 		$good = false;
-		for($i = 7; $i < 9; $i++)
+		for($i = 9; $i < 11; $i++)
 		{
 			if(isset($_POST[$array[$i]]))
 			{
 				$good = true;
 				switch($i)
 				{
-				case 7: $temp .= "<li>Smooth</li>"; break;
-				case 8: $temp .= "<li>Handscraped</li>"; break;
+				case 9: $temp .= "<li>Smooth</li>"; break;
+				case 10: $temp .= "<li>Handscraped</li>"; break;
 				}
 			}
 			
@@ -138,16 +140,16 @@ function get_hardwood_info()
 		
 		$temp = "<li>Width</li><ul>";
 		$good = false;
-		for($i = 9; $i < 12; $i++)
+		for($i = 11; $i < 14; $i++)
 		{
 			if(isset($_POST[$array[$i]]))
 			{
 				$good = true;
 				switch($i)
 				{
-				case 9: $temp .= "<li>2' 1/4\"</li>"; break;
-				case 10: $temp .= "<li>3' 1/2\"</li>"; break;
-				case 11: $temp .= "<li>5'</li>"; break;
+				case 11: $temp .= "<li>2' 1/4\"</li>"; break;
+				case 12: $temp .= "<li>3' 1/2\"</li>"; break;
+				case 13: $temp .= "<li>5'</li>"; break;
 				}
 			}
 			
@@ -303,16 +305,89 @@ function get_tile_info()
 	return $info;
 }
 
+function get_carpet_info()
+{
+	$info = "";
+	
+	$array = array("CarpetFrieze","CarpetPlush","CarpetBerber","CarpetSaxony",
+		"CarpetSolid","CarpetMultiColor","CarpetBarberPole");
+	
+	$good = false;
+	
+	for($i = 0; $i < 7; $i++)
+	{
+		if(isset($_POST[$array[$i]]))
+		{
+			$good = true;
+			break;
+		}
+		
+	}
+	
+	if($good)
+	{
+		$info = "<hr><ul>";
+		
+		$good = false;
+		$info .= "<li>Carpet</li>";
+		$temp = "<ul><li>Style</li><ul>";
+		for($i = 0; $i < 4; $i++)
+		{
+			if(isset($_POST[$array[$i]]))
+			{
+				$good = true;
+				switch($i)
+				{
+				case 0: $temp .= "<li>Frieze</li>"; break;
+				case 1: $temp .= "<li>Plush</li>"; break;
+				case 2: $temp .= "<li>Berber</li>"; break;
+				case 3: $temp .= "<li>Saxony</li>"; break;
+				}
+			}
+			
+		}
+		$temp .= "</ul>";
+		if($good)
+			$info .= $temp;
+		
+		
+		$temp = "<li>Color</li><ul>";
+		$good = false;
+		for($i = 4; $i < 7; $i++)
+		{
+			if(isset($_POST[$array[$i]]))
+			{
+				$good = true;
+				switch($i)
+				{
+				case 4: $temp .= "<li>Solid</li>"; break;
+				case 5: $temp .= "<li>Multi Color</li>"; break;
+				case 6: $temp .= "<li>Barber Pole</li>"; break;
+				}
+			}
+			
+		}
+		$temp .= "</ul>";
+		if($good)
+			$info .= $temp;
+			
+		$info .= "</ul></ul>";
+	}
+	
+	return $info;
+}
+
 function send_email($emailBody)
 {
 	
-	$recipient = "alex.wveit@gmail.com";
+	$recipient = "michael.overstock@yahoo.com";
 	$subject = "New Measurement Request";
 
 	// To send HTML mail, the Content-type header must be set
 	$mailheader  = 'MIME-Version: 1.0' . "\r\n";
 	$mailheader .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	$mailheader .= "From: ".$_POST['email']."\r\n";
+	$mailheader .= "cc: <alex.wveit@gmail.com>";
 	
 	mail($recipient, $subject, $emailBody, $mailheader) or die("Error!");
 }
@@ -329,6 +404,8 @@ $emailBody .= get_hardwood_info();
 $emailBody .= get_laminate_info();
 
 $emailBody .= get_tile_info();
+
+$emailBody .= get_carpet_info();
 
 //echo $emailBody;
 

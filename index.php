@@ -38,19 +38,17 @@ function good_email_address(x)
 function validateForm()
 {
 	var defText = " must be filled out";
-	var field = document.forms["myForm"]["datetime"];
+	var field = document.forms["myForm"]["date"];
 	var value = field.value;
 	if (isWhitespaceNotEmpty(value))
 	{
-		alert("Date & Time" + defText);
+		alert("Date" + defText);
 		field.focus();
 		return false;
 	}
 	else
 	{
-		var temp = value.split("T");
-		var date = temp[0].split("-");
-		var time = temp[1].split(":");
+		var date = value.split("-");
 		var today = new Date();
 		
 		if(parseInt(date[0]) < today.getFullYear())
@@ -72,24 +70,6 @@ function validateForm()
 			alert("Invalid Day " + date[2]);
 			field.focus();
 			return false;
-		}
-		else if(parseInt(date[2]) == today.getDate())
-		{
-			if(parseInt(time[0]) < today.getHours())
-			{
-				alert("Invalid Time");
-				field.focus();
-				return false;
-			}
-			else if(parseInt(time[0]) == today.getHours())
-			{
-				if(parseInt(time[1]) < today.getMinutes())
-				{
-					alert("Invalid Time");
-					field.focus();
-					return false;
-				}
-			}
 		}	
 	}
 
@@ -153,9 +133,10 @@ function validateForm()
 		field.focus();
 		return false;
 	}
-	
+		
 	return true;
 }
+
 </script>
 </head>
 <body>
@@ -177,10 +158,25 @@ function validateForm()
 </div>
 <br>
 <form name="myForm" onsubmit="return validateForm()" action="next.php" method="post">
-	<table border="0">
+	<table border="1">
 		<tr><td colspan="2">* = required</td></tr>
 		<tr>
-			<td colspan="2">Date & Time:* <input type="datetime-local" name="datetime"></td>
+			<td>Date:*<br><input type="date" name="date"></td>
+			<td>
+				Time:*<br>
+				<select name="time" size="1">
+					<option value="8am">8am</option>
+					<option value="9am">9am</option>
+					<option value="10am">10am</option>
+					<option value="11am">11am</option>
+					<option value="12pm">12pm</option>
+					<option value="1pm">1pm</option>
+					<option value="2pm">2pm</option>
+					<option value="3pm">3pm</option>
+					<option value="4pm">4pm</option>
+					<option value="5pm">5pm</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td>First Name:*<br><input type="text" name="firstname" value="" /></td>
@@ -247,7 +243,13 @@ function validateForm()
 									</tr>
 									<tr>
 										<td><input type="checkbox" id="Cork" name="Cork" />Cork</td>
+										<td><input type="checkbox" id="HardwoodBirch" name="HardwoodBirch"/>Birch</td>
 										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="checkbox" id="HardwoodExotic" name="HardwoodExotic"/>Exotic</td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -305,6 +307,35 @@ function validateForm()
 									</tr>
 									<tr>
 										<td><input type="checkbox" id="Glass" name="Glass" />Glass</td>
+									</tr>
+								</table>
+							</li>
+						</ol>
+					</li>
+					<li><br></li>
+					<li>
+						<label for="Carpet">Carpet</label> <input class="oltree" type="checkbox" id="Carpet" name="Carpet" />
+						<ol>
+							<li>
+								<table style="position:relative; left:-30px; width:220px; border-style:solid; border-width:1px;" >
+									<tr>
+										<td><b>Style</b></td>
+										<td><b>Color</b></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="CarpetFrieze" name="CarpetFrieze" />Frieze</td>
+										<td><input type="checkbox" id="CarpetSolid" name="CarpetSolid" />Solid</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="CarpetPlush" name="CarpetPlush" />Plush</td>
+										<td><input type="checkbox" id="CarpetMultiColor" name="CarpetMultiColor" />Multi Color</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="CarpetBerber" name="CarpetBerber" />Berber</td>
+										<td><input type="checkbox" id="CarpetBarberPole" name="CarpetBarberPole" />Barber Pole</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" id="CarpetSaxony" name="CarpetSaxony" />Saxony</td>
 									</tr>
 								</table>
 							</li>
