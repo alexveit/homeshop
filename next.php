@@ -1,6 +1,7 @@
 <html>
 <body>
 <?php
+require_once('recaptchalib.php');
 
 function get_user_info()
 {
@@ -49,6 +50,7 @@ function get_user_info()
 				</table>
 			</td>
 		</tr>
+		<tr><td><b>Notes:</b><br>".$_POST['notes']."</td></tr>
 	</table>
 	";
 	
@@ -396,22 +398,34 @@ function display_thankyou()
 {
 	echo "Thank you ".$_POST['firstname']." ".$_POST['lastname']."!<br>Your appointment request has been sent.<br>A representative will be contacting you shortly."; 
 }
-	
-$emailBody = get_user_info();
 
-$emailBody .= get_hardwood_info();
+function do_procedure()
+{
+	$emailBody = get_user_info();
+	$emailBody .= get_hardwood_info();
+	$emailBody .= get_laminate_info();
+	$emailBody .= get_tile_info();
+	$emailBody .= get_carpet_info();
 
-$emailBody .= get_laminate_info();
+	//echo $emailBody;
+	send_email($emailBody);
+	display_thankyou();
+}
 
-$emailBody .= get_tile_info();
+$privatekey = "6LcAbeMSAAAAACObiusoN4dWS_sTxl6R0ivpdNqH";
+$resp = recaptcha_check_answer ($privatekey,
+							$_SERVER["REMOTE_ADDR"],
+							$_POST["recaptcha_challenge_field"],
+							$_POST["recaptcha_response_field"]);
 
-$emailBody .= get_carpet_info();
-
-//echo $emailBody;
-
-send_email($emailBody);
-
-display_thankyou();
+if (!$resp->is_valid)
+{
+	$_SESSION['reload'] = true;
+	require_once('index.php');
+} else
+{
+	do_procedure();
+}
 
 ?>
 </body>

@@ -12,10 +12,7 @@ input[type="text"] {
 }
 textarea
 {
-    border:1px  #999999;
-    width:100%;
-    margin:5px 0;
-    padding:3px;
+    width:100%-10px;
 }
 </style>
 <script>
@@ -149,7 +146,7 @@ function validateForm()
 			<td>
 				<table>
 					<tr>
-						<td style="border-style:solid; border-width:1px;"><i>Fill out your information and<br>the type of material you would<br>like us to bring.</i></td>
+						<td style="border-style:solid; border-width:1px; padding:5px;"><i>Fill out your information and<br>the type of material you would<br>like us to bring.</i></td>
 					</tr>
 				</table>
 			</td>
@@ -157,37 +154,45 @@ function validateForm()
 	</table>
 </div>
 <br>
+<?php
+$reload = false;
+if(isset($_SESSION['reload']))
+{
+	$reload = true;
+	echo "<b style='color: red;'>* Invalid Captcha</b><br>";		
+}
+?>
 <form name="myForm" onsubmit="return validateForm()" action="next.php" method="post">
-	<table border="1">
+	<table border="0">
 		<tr><td colspan="2">* = required</td></tr>
 		<tr>
-			<td>Date:*<br><input type="date" name="date"></td>
+			<td>Date:*<br><input type="date" name="date" <?php if($reload){ echo "value='".$_POST['date']."'"; } ?> ></td>
 			<td>
 				Time:*<br>
 				<select name="time" size="1">
-					<option value="8am">8am</option>
-					<option value="9am">9am</option>
-					<option value="10am">10am</option>
-					<option value="11am">11am</option>
-					<option value="12pm">12pm</option>
-					<option value="1pm">1pm</option>
-					<option value="2pm">2pm</option>
-					<option value="3pm">3pm</option>
-					<option value="4pm">4pm</option>
-					<option value="5pm">5pm</option>
+					<option value="8am" <?php if($reload) echo ($_POST['time'] == "8am") ? 'selected="selected"': ''; ?> >8am</option>
+					<option value="9am" <?php if($reload) echo ($_POST['time'] == "9am") ? 'selected="selected"': ''; ?> >9am</option>
+					<option value="10am" <?php if($reload) echo ($_POST['time'] == "10am") ? 'selected="selected"': ''; ?> >10am</option>
+					<option value="11am" <?php if($reload) echo ($_POST['time'] == "11am") ? 'selected="selected"': ''; ?> >11am</option>
+					<option value="12pm" <?php if($reload) echo ($_POST['time'] == "12pm") ? 'selected="selected"': ''; ?> >12pm</option>
+					<option value="1pm" <?php if($reload) echo ($_POST['time'] == "1pm") ? 'selected="selected"': ''; ?> >1pm</option>
+					<option value="2pm" <?php if($reload) echo ($_POST['time'] == "2pm") ? 'selected="selected"': ''; ?> >2pm</option>
+					<option value="3pm" <?php if($reload) echo ($_POST['time'] == "3pm") ? 'selected="selected"': ''; ?> >3pm</option>
+					<option value="4pm" <?php if($reload) echo ($_POST['time'] == "4pm") ? 'selected="selected"': ''; ?> >4pm</option>
+					<option value="5pm" <?php if($reload) echo ($_POST['time'] == "5pm") ? 'selected="selected"': ''; ?> >5pm</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>First Name:*<br><input type="text" name="firstname" value="" /></td>
-			<td>Last Name:*<br><input type="text" name="lastname" value="" /></td>
+			<td>First Name:*<br><input type="text" name="firstname" <?php echo ($reload) ? "value='".$_POST['firstname']."'" : "value=''"; ?> /></td>
+			<td>Last Name:*<br><input type="text" name="lastname" <?php echo ($reload) ? "value='".$_POST['lastname']."'" : "value=''"; ?> /></td>
 		</tr>
 		<tr>
 			<td colspan="2">
 				<table border="0" style="width:100%">
 					<tr>
-						<td style="width:75%">Street address:*<br><input type="text" name="streetaddress" value="" /></td>
-						<td>Apt#:<br><input type="text" name="aptnumber" value="" /></td>
+						<td style="width:75%">Street address:*<br><input type="text" name="streetaddress" <?php echo ($reload) ? "value='".$_POST['streetaddress']."'" : "value=''"; ?> /></td>
+						<td>Apt#:<br><input type="text" name="aptnumber" <?php echo ($reload) ? "value='".$_POST['aptnumber']."'" : "value=''"; ?> /></td>
 					</tr>
 				</table>
 			</td>
@@ -196,24 +201,25 @@ function validateForm()
 			<td colspan="2">
 				<table border="0" style="width:100%">
 					<tr>
-						<td style="width:65%">City:<br><input type="text" name="city" value="" /></td>
-						<td style="width:15px">State:<br><input type="text" name="state" value="" /></td>
-						<td>Zip:*<br><input type="text" name="zipcode" value="" /></td>
+						<td style="width:65%">City:<br><input type="text" name="city" <?php echo ($reload) ? "value='".$_POST['city']."'" : "value=''"; ?> /></td>
+						<td style="width:15px">State:<br><input type="text" name="state" <?php echo ($reload) ? "value='".$_POST['state']."'" : "value=''"; ?> /></td>
+						<td>Zip:*<br><input type="text" name="zipcode" <?php echo ($reload) ? "value='".$_POST['zipcode']."'" : "value=''"; ?> /></td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 		<tr>
-			<td>Phone Number:*<br><input type="text" name="phonenumber" value="" /></td>
-			<td >Email:*<br><input type="text" name="email" value="" /></td>
+			<td>Phone Number:*<br><input type="text" name="phonenumber" <?php echo ($reload) ? "value='".$_POST['phonenumber']."'" : "value=''"; ?> /></td>
+			<td >Email:*<br><input type="text" name="email" <?php echo ($reload) ? "value='".$_POST['email']."'" : "value=''"; ?> /></td>
 		</tr>
 		<tr>
-			<td colspan="2">
+			<td colspan="2" style="border-style:solid; border-width:1px;">
 				<ol class="tree">
-					<li>I Want to see the following samples.</li>
+					<li><br></li>
+					<li><big>Material</big></li>
 					<li><br></li>
 					<li>
-						<label for="Hardwood">Hardwood</label> <input class="oltree" type="checkbox" id="Hardwood" name="Hardwood" />
+						<label for="Hardwood">Hardwood</label> <input class="oltree" type="checkbox" name="Hardwood" />
 						<ol>
 							<li>
 								<table style="position:relative; left:-30px; width:400px; border-style:solid; border-width:1px;" >
@@ -224,32 +230,32 @@ function validateForm()
 										<td><b>Width</b></td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Solid" name="Solid" />Solid</td>
-										<td><input type="checkbox" id="HardwoodOak" name="HardwoodOak"/>Oak</td>
-										<td><input type="checkbox" id="HardwoodSmooth" name="HardwoodSmooth" />Smooth</td>
-										<td><input type="checkbox" id="Hardwoodtwoonequarter" name="Hardwoodtwoonequarter" />2 1/4"</td>
+										<td><input type="checkbox" name="Solid" <?php if(isset($_POST['Solid'])) { echo "checked='true'"; } ?>  />Solid</td>
+										<td><input type="checkbox" name="HardwoodOak" <?php if(isset($_POST['HardwoodOak'])) { echo "checked='true'"; } ?> />Oak</td>
+										<td><input type="checkbox" name="HardwoodSmooth" <?php if(isset($_POST['HardwoodSmooth'])) { echo "checked='true'"; } ?> />Smooth</td>
+										<td><input type="checkbox" name="Hardwoodtwoonequarter" <?php if(isset($_POST['Hardwoodtwoonequarter'])) { echo "checked='true'"; } ?> />2 1/4"</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Engineered" name="Engineered" />Engineered</td>
-										<td><input type="checkbox" id="HardwoodMaple" name="HardwoodMaple"/>Maple</td>
-										<td><input type="checkbox" id="HardwoodHandscraped" name="HardwoodHandscraped" />Handscraped</td>
-										<td><input type="checkbox" id="Hardwoodthreehalf" name="Hardwoodthreehalf" />3 1/2"</td>
+										<td><input type="checkbox" name="Engineered" <?php if(isset($_POST['Engineered'])) { echo "checked='true'"; } ?> />Engineered</td>
+										<td><input type="checkbox" name="HardwoodMaple" <?php if(isset($_POST['HardwoodMaple'])) { echo "checked='true'"; } ?> />Maple</td>
+										<td><input type="checkbox" name="HardwoodHandscraped" <?php if(isset($_POST['HardwoodHandscraped'])) { echo "checked='true'"; } ?> />Handscraped</td>
+										<td><input type="checkbox" name="Hardwoodthreehalf" <?php if(isset($_POST['Hardwoodthreehalf'])) { echo "checked='true'"; } ?> />3 1/2"</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Bamboo" name="Bamboo" />Bamboo</td>
-										<td><input type="checkbox" id="HardwoodHickory" name="HardwoodHickory"/>Hickory</td>
+										<td><input type="checkbox" name="Bamboo" <?php if(isset($_POST['Bamboo'])) { echo "checked='true'"; } ?> />Bamboo</td>
+										<td><input type="checkbox" name="HardwoodHickory" <?php if(isset($_POST['HardwoodHickory'])) { echo "checked='true'"; } ?> />Hickory</td>
 										<td></td>
-										<td><input type="checkbox" id="Hardwoodfive" name="Hardwoodfive" />5"</td>
+										<td><input type="checkbox" name="Hardwoodfive" <?php if(isset($_POST['Hardwoodfive'])) { echo "checked='true'"; } ?> />5"</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Cork" name="Cork" />Cork</td>
-										<td><input type="checkbox" id="HardwoodBirch" name="HardwoodBirch"/>Birch</td>
+										<td><input type="checkbox" name="Cork" <?php if(isset($_POST['Cork'])) { echo "checked='true'"; } ?> />Cork</td>
+										<td><input type="checkbox" name="HardwoodBirch" <?php if(isset($_POST['HardwoodBirch'])) { echo "checked='true'"; } ?> />Birch</td>
 										<td></td>
 										<td></td>
 									</tr>
 									<tr>
 										<td></td>
-										<td><input type="checkbox" id="HardwoodExotic" name="HardwoodExotic"/>Exotic</td>
+										<td><input type="checkbox" name="HardwoodExotic" <?php if(isset($_POST['HardwoodExotic'])) { echo "checked='true'"; } ?> />Exotic</td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -259,7 +265,7 @@ function validateForm()
 					</li>
 					<li><br></li>
 					<li>
-						<label for="Laminate">Laminate</label> <input class="oltree" type="checkbox" id="Laminate" name="Laminate" />
+						<label for="Laminate">Laminate</label> <input class="oltree" type="checkbox" name="Laminate" />
 						<ol>
 							<li>
 								<table style="position:relative; left:-30px; width:280px; border-style:solid; border-width:1px;" >
@@ -269,19 +275,19 @@ function validateForm()
 										<td><b>Width</b></td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Laminate7" name="Laminate7" />7</td>
-										<td><input type="checkbox" id="LaminateHandscraped" name="LaminateHandscraped"/>Handscraped</td>
-										<td><input type="checkbox" id="Laminate3inch" name="Laminate3inch"/>3"</td>
+										<td><input type="checkbox" name="Laminate7" <?php if(isset($_POST['Laminate7'])) { echo "checked='true'"; } ?> />7</td>
+										<td><input type="checkbox" name="LaminateHandscraped" <?php if(isset($_POST['LaminateHandscraped'])) { echo "checked='true'"; } ?> />Handscraped</td>
+										<td><input type="checkbox" name="Laminate3inch" <?php if(isset($_POST['Laminate3inch'])) { echo "checked='true'"; } ?> />3"</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Laminate8" name="Laminate8" />8</td>
-										<td><input type="checkbox" id="LaminateSmooth" name="LaminateSmooth"/>Smooth</td>
-										<td><input type="checkbox" id="Laminate5inch" name="Laminate5inch"/>5"</td>
+										<td><input type="checkbox" name="Laminate8" <?php if(isset($_POST['Laminate8'])) { echo "checked='true'"; } ?> />8</td>
+										<td><input type="checkbox" name="LaminateSmooth" <?php if(isset($_POST['LaminateSmooth'])) { echo "checked='true'"; } ?> />Smooth</td>
+										<td><input type="checkbox" name="Laminate5inch" <?php if(isset($_POST['Laminate5inch'])) { echo "checked='true'"; } ?> />5"</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Laminate12" name="Laminate12" />12</td>
-										<td><input type="checkbox" id="LaminatePiano" name="LaminatePiano"/>Piano</td>
-										<td><input type="checkbox" id="Laminate6inch" name="Laminate6inch"/>6"</td>
+										<td><input type="checkbox" name="Laminate12" <?php if(isset($_POST['Laminate12'])) { echo "checked='true'"; } ?> />12</td>
+										<td><input type="checkbox" name="LaminatePiano" <?php if(isset($_POST['LaminatePiano'])) { echo "checked='true'"; } ?> />Piano</td>
+										<td><input type="checkbox" name="Laminate6inch" <?php if(isset($_POST['Laminate6inch'])) { echo "checked='true'"; } ?> />6"</td>
 									</tr>
 								</table>
 							</li>
@@ -289,7 +295,7 @@ function validateForm()
 					</li>
 					<li><br></li>
 					<li>
-						<label for="Tile">Tile</label> <input class="oltree" type="checkbox" id="Tile" name="Tile" />
+						<label for="Tile">Tile</label> <input class="oltree" type="checkbox" name="Tile" />
 						<ol>
 							<li>
 								<table style="position:relative; left:-30px; width:100px; border-style:solid; border-width:1px;" >
@@ -297,16 +303,16 @@ function validateForm()
 										<td><b>Type</b></td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Ceramic" name="Ceramic" />Ceramic</td>
+										<td><input type="checkbox" name="Ceramic" <?php if(isset($_POST['Ceramic'])) { echo "checked='true'"; } ?> />Ceramic</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Porcelain" name="Porcelain" />Porcelain</td>
+										<td><input type="checkbox" name="Porcelain" <?php if(isset($_POST['Porcelain'])) { echo "checked='true'"; } ?> />Porcelain</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Stone" name="Stone" />Stone</td>
+										<td><input type="checkbox" name="Stone" <?php if(isset($_POST['Stone'])) { echo "checked='true'"; } ?> />Stone</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="Glass" name="Glass" />Glass</td>
+										<td><input type="checkbox" name="Glass" <?php if(isset($_POST['Glass'])) { echo "checked='true'"; } ?> />Glass</td>
 									</tr>
 								</table>
 							</li>
@@ -314,7 +320,7 @@ function validateForm()
 					</li>
 					<li><br></li>
 					<li>
-						<label for="Carpet">Carpet</label> <input class="oltree" type="checkbox" id="Carpet" name="Carpet" />
+						<label for="Carpet">Carpet</label> <input class="oltree" type="checkbox" name="Carpet" />
 						<ol>
 							<li>
 								<table style="position:relative; left:-30px; width:220px; border-style:solid; border-width:1px;" >
@@ -323,19 +329,19 @@ function validateForm()
 										<td><b>Color</b></td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="CarpetFrieze" name="CarpetFrieze" />Frieze</td>
-										<td><input type="checkbox" id="CarpetSolid" name="CarpetSolid" />Solid</td>
+										<td><input type="checkbox" name="CarpetFrieze" <?php if(isset($_POST['CarpetFrieze'])) { echo "checked='true'"; } ?> />Frieze</td>
+										<td><input type="checkbox" name="CarpetSolid" <?php if(isset($_POST['CarpetSolid'])) { echo "checked='true'"; } ?> />Solid</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="CarpetPlush" name="CarpetPlush" />Plush</td>
-										<td><input type="checkbox" id="CarpetMultiColor" name="CarpetMultiColor" />Multi Color</td>
+										<td><input type="checkbox" name="CarpetPlush" <?php if(isset($_POST['CarpetPlush'])) { echo "checked='true'"; } ?> />Plush</td>
+										<td><input type="checkbox" name="CarpetMultiColor" <?php if(isset($_POST['CarpetMultiColor'])) { echo "checked='true'"; } ?> />Multi Color</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="CarpetBerber" name="CarpetBerber" />Berber</td>
-										<td><input type="checkbox" id="CarpetBarberPole" name="CarpetBarberPole" />Barber Pole</td>
+										<td><input type="checkbox" name="CarpetBerber" <?php if(isset($_POST['CarpetBerber'])) { echo "checked='true'"; } ?> />Berber</td>
+										<td><input type="checkbox" name="CarpetBarberPole" <?php if(isset($_POST['CarpetBarberPole'])) { echo "checked='true'"; } ?> />Barber Pole</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" id="CarpetSaxony" name="CarpetSaxony" />Saxony</td>
+										<td><input type="checkbox" name="CarpetSaxony" <?php if(isset($_POST['CarpetSaxony'])) { echo "checked='true'"; } ?> />Saxony</td>
 									</tr>
 								</table>
 							</li>
@@ -344,7 +350,21 @@ function validateForm()
 				</ol>	
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2">
+				<br>
+				Additional notes:<br>
+				<textarea name="notes" rows="5" cols="60" style=""><?php if($reload) { echo $_POST['notes']; } ?></textarea>
+			</td>
+		</tr>
 	</table>
+	<?php
+	  require_once('recaptchalib.php');
+	  $publickey = "6LcAbeMSAAAAACBMthYS-SWHeFkoNL683E4alo3P"; // you got this from the signup page
+	  if($reload)
+		echo "<b style='color: red;'>* Invalid Captcha</b><br>";
+	  echo recaptcha_get_html($publickey);
+	?>
 	<input name="save" type="submit" value="Submit" />
 	<input type="reset" value="Clear" />
 </form>
